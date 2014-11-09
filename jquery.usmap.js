@@ -107,6 +107,8 @@
 
   var previouslyClickedState = {};
 
+  //var enableTooltips = true;
+
   // Default options
   var defaults = {
     // The styles for the state
@@ -128,8 +130,10 @@
     // The time for the animation, set to false to remove the animation
     'stateHoverAnimation': 500,
 
+    'enableToolTips': false,
+
     'stateClickStyles': {
-      fill: 'lightpink',
+      fill: 'green',
       persistent: false,
       stroke: "#000",
       scale: [1.1, 1.1]
@@ -326,8 +330,22 @@
         }
         this.stateShapes[state] = R.path(paths[state]).attr(stateAttr);
         this.topShape = this.stateShapes[state];
-
-        this.stateHitAreas[state] = R.path(paths[state]).attr({title: fullStateName[state], fill: "#000", "stroke-width": 0, "opacity" : 0.0, 'cursor': 'pointer'});
+        if (this.options.enableToolTips) {
+          this.stateHitAreas[state] = R.path(paths[state]).attr({
+            title: fullStateName[state],
+            fill: "#000",
+            "stroke-width": 0,
+            "opacity": 0.0,
+            'cursor': 'pointer'
+          });
+        } else {
+          this.stateHitAreas[state] = R.path(paths[state]).attr({
+            fill: "#000",
+            "stroke-width": 0,
+            "opacity": 0.0,
+            'cursor': 'pointer'
+          });
+        }
         this.stateHitAreas[state].node.dataState = state;
         this.stateHitAreas[state].node.id = state;
       }
@@ -543,7 +561,7 @@
       }
 
 
-      var attrs = {}
+      var attrs = {};
 
       if(this.options.stateSpecificClickStyles[stateData.name]) {
         $.extend(attrs, this.options.stateClickStyles, this.options.stateSpecificClickStyles[stateData.name]);
@@ -563,7 +581,7 @@
 
       stateData.shape.animate(attrs, this.options.stateHoverAnimation);
       this.options.stateSpecificStyles[stateData.name] = attrs;
-      this.options.stateSpecificHoverStyles[stateData.name] = attrs
+      this.options.stateSpecificHoverStyles[stateData.name] = attrs;
       this.options.stateSpecificClickStyles[stateData.name] = attrs;
 
       return !this._triggerEvent('click', event, stateData);
