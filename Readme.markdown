@@ -10,6 +10,7 @@ New features:
 * New features rely on updated version of Raphael (included in this repo's lib directory)
 
 Example:
+
     $('#map').usmap({
       stateClickStyles: {fill: '#B9BF15', persistent: false},
       enableToolTips: true
