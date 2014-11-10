@@ -7,7 +7,7 @@ New features:
     * Persistence can be set with a second parameter. False: Reset style when new state is clicked. True: Styling lasts as states are clicked.
 * Can specify how a specific state should be styled after being clicked by setting stateSpecificClickStyles (behavior same as above).
 * Can enable tool tips for the states by setting enableToolTips.
-* New features rely on updated version of Raphael (included in this repo's lib directory)
+* New features depend on updated version of Raphael (included in this repo's lib directory)
 
 Example:
 
